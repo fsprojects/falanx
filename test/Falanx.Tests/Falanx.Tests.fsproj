@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProtoFile Include="schemas\falanx_test.proto" />
     <ProtoFile Include="schemas\bundle_with_package.proto" />
+    <None Include="schemas\enum_test.proto" />
     <ProtoFile Include="schemas\bundle_with_package2.proto">
       <OutputPath>Models\my.bundle.fs</OutputPath>
     </ProtoFile>
