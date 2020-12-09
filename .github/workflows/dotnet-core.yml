@@ -1,0 +1,43 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build-windows:
+    runs-on: windows-latest
+    env:
+      SBT_HOME: '' # disable scala tests
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.201
+    - name: Restore .NET local tools
+      run: dotnet tool restore
+    - name: Create package
+      run: dotnet pack build.proj -v n
+    - name: Run tests
+      run: dotnet test build.proj -v n
+
+  build-linux:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.201
+    - name: Restore .NET local tools
+      run: dotnet tool restore
+    - name: Create package
+      run: dotnet pack build.proj -v n
+    - name: Run tests
+      run: dotnet test build.proj -v n
